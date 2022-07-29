@@ -25,14 +25,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           
-      - name: IaC
+      - name: install make
         run: |
-          cd infra
-          terraform init
-          terraform apply --auto-approve
-      
-      - name: Configuring deploy using ansible
-        run: |
-          cd ansible
-          cd scripts
-          ./run-ansible.sh
+          sudo apt-get update
+          sudo apt-get install make
+          
+      - name: make all-up
+        run: make all-up
