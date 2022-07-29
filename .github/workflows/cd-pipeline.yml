@@ -33,7 +33,6 @@ jobs:
       
       - name: Configuring deploy using ansible
         run: |
-          cd ..
           cd ansible
           cd scripts
           ./run-ansible.sh
