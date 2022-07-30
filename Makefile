@@ -12,7 +12,8 @@ infra-up:
 	cd infra && terraform apply -lock=false --auto-approve
 
 ansible-up:
-	cd ansible/scripts && ./run-ansible.sh
+	cd ansible/scripts && chmod +x build.sh
+	./run-ansible.sh
 	
 infra-down:
 	cd infra && terraform destroy --auto-approve --force
