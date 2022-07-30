@@ -1,27 +1,21 @@
 - name: Deploy web
-   hosts: web
-   tasks:
-     - name: get rice
-       shell: GO111MODULE=off go get github.com/GeertJohan/go.rice/...
-       become: yes
-     - name: export path
-       shell: export GOPATH=$(go env GOPATH)
-       become: yes
-     - name: export path2
-       shell: export PATH=$PATH:$(go env GOPATH)/bin
-       become: yes
-     - name: change mode
-       shell: chmod +x build.sh
-       become: yes
-     - name: get rice2
-       shell: go get github.com/GeertJohan/go.rice/...
-       become: yes
-     - name: export path3
-       shell: export PATH="$PATH:$GOPATH/bin/"
-       become: yes
-     - name: reconfigure
-       shell: sudo dpkg-reconfigure dash
-       become: yes
-     - name: build
-       shell: ./build.sh
-       become: yes
+  hosts: web
+  tasks:
+    - name: get rice
+      shell: GO111MODULE=off go get github.com/GeertJohan/go.rice/...
+      become: yes
+    - name: export path
+      shell: export GOPATH=$(go env GOPATH)
+      become: yes
+    - name: export path2
+      shell: export PATH=$PATH:$(go env GOPATH)/bin
+      become: yes
+    - name: change mode
+      shell: chmod +x build.sh
+      become: yes
+    - name: reconfigure
+      shell: sudo dpkg-reconfigure dash
+      become: yes
+    - name: build
+      shell: ./build.sh
+      become: yes
