@@ -19,3 +19,20 @@
     - name: build
       shell: ./build.sh
       become: yes
+
+- name: Deploy DB
+  hosts: db
+  tasks:
+    - name: install docker 
+      shell: yum -y install docker
+      become: yes
+    - name: start docker
+      shell: systemctl start docker
+      become: yes
+    - name: pull
+      shell: docker pull postgres
+      become: yes
+    - name: run
+      shell: docker run --name postgres -e POSTGRES_PASSWORD=password -d postgres
+      become: yes
+
