@@ -1,38 +1,40 @@
 - name: Deploy web
   hosts: web
   tasks:
-    - name: get rice
-      shell: GO111MODULE=off go get github.com/GeertJohan/go.rice/...
-      become: yes
-    - name: export path
-      shell: export GOPATH=$(go env GOPATH)
-      become: yes
-    - name: export path2
-      shell: export PATH=$PATH:$(go env GOPATH)/bin
-      become: yes
-    - name: change mode
-      shell: chmod +x build.sh
-      become: yes
-    - name: reconfigure
-      shell: sudo dpkg-reconfigure dash
-      become: yes
-    - name: build
-      shell: ./build.sh
+    - name: mkdir.
+      shell: mkdir -p /www/application
       become: yes
 
-- name: Deploy DB
-  hosts: db
-  tasks:
-    - name: install docker 
-      shell: yum -y install docker
+    - name: Download and unzip file
       become: yes
-    - name: start docker
-      shell: systemctl start docker
+      unarchive:
+        src: https://github.com/servian/TechChallengeApp/releases/download/v.0.10.0/TechChallengeApp_v.0.10.0_linux64.zip
+        dest: /www/application
+        remote_src: yes
+
+    - name: reconfigure
+      vars:
+        db_user: "{{ db_user }}"
+        db_password: "{{ db_pass }}"
+        db_name: postgres
+        db_port: 5432
+        actual_db_endpoint: "{{db_endpoint | replace(':5432','')}}"
+        listen_host: "0.0.0.0"
+        listen_port: 80
+      template:
+        dest: /www/application/dist/conf.toml
+        src: templates/service.tpl
       become: yes
-    - name: pull
-      shell: docker pull postgres
+
+    - name: seed database
+      shell: ./TechChallengeApp updatedb -s
+      args:
+        chdir: /www/application/dist
       become: yes
-    - name: run
-      shell: docker run --name postgres -e POSTGRES_PASSWORD=password -d postgres
+      
+    - name: Start server
       become: yes
+      shell: ./TechChallengeApp serve
+      args:
+        chdir: /www/application/dist
 
