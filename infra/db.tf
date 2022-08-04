@@ -1,3 +1,4 @@
+// Creating the security groups for db and web to use on appropriate ports
 resource "aws_security_group" "allow_http_ssh" {
   description = "Allow SSH and http inbound traffic"
   vpc_id      = aws_vpc.main.id
@@ -59,6 +60,7 @@ resource "aws_security_group" "allow_postgres" {
   }
 }
 
+// Creates the postgres db with desired parameters
 resource "aws_db_instance" "data" {
   allocated_storage      = 10
   storage_type           = "gp2"

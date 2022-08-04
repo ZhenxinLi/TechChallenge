@@ -3,10 +3,7 @@ resource "aws_key_pair" "deployer" {
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
-/* • an EC2 instance named “web” deployed into private_az1 (use the latest Amazon Linux 
-2 64-bit (x86) image and deploy a t2.micro instance size). */
-/* • The “web” instance should allow ingress on the appropriate application port and SSH 
-ingress on port 22 */
+// creates the web EC2 Instance
 resource "aws_instance" "web" {
   ami             = data.aws_ami.Linux.id
   instance_type   = "t2.micro"
@@ -20,6 +17,7 @@ resource "aws_instance" "web" {
   }
 }
 
+// filtering the lastest Linux ami to use automatically
 data "aws_ami" "Linux" {
   most_recent = true
   owners      = ["amazon"]

@@ -11,10 +11,13 @@ on:
 
 jobs:        
   Continuous-Deployment:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       
+      # generating the deployer key pairs, refering to 'Servian key' created by IaC terraform.
+      # if running in local and you have your keys on your machine, you dont need to reproduce this step. 
       - name: generate key pairs
         run: yes '' | ssh-keygen -N '' > /dev/null
 

@@ -136,6 +136,7 @@ resource "aws_default_route_table" "main" {
   }
 }
 
+// • Add lb to web
 resource "aws_lb_target_group" "web" {
   name     = "tech-challenge-targetgroup"
   port     = 80

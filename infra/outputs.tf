@@ -5,7 +5,7 @@ resource "local_file" "env_file" {
     DOC
     filename = "../ansible/.env"
 }
-
+//gathering the outputs for future conf.toml configuration
 output "db_endpoint" {
   value = aws_db_instance.data.endpoint
 }
