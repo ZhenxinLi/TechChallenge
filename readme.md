@@ -12,7 +12,7 @@ The project itself is a simple GTD application provided by the employer. The app
   
   To update the secrets, navigate into repo settings, then find the Actions tab under Secrets, and update relative values into the secrets.  
   
-![alt text](https://github.com/rmit-computing-technologies/cosc2759-assignment-2-ZhenxinLi/blob/feature/img/githubSecrets.jpg?raw=true)  
+![alt text](https://github.com/ZhenxinLi/TechChallenge/blob/main/img/secrets.jpg?raw=true)  
   
   Any commits pushed or PRs raised to the repository would invoke the pipeline to run, if the pipeline doesn't return any errors it would be keep running 
   until the user clicks 'cancel workflow', this is because the `serve` command would take over the commandline.  
@@ -20,7 +20,7 @@ The project itself is a simple GTD application provided by the employer. The app
   Finally the user can check the deployed application by clicking the web instance address existing in the AWS EC2 service page. Note that the user might need to modify 
   the `https` into `http`.
   
-![alt text](https://github.com/rmit-computing-technologies/cosc2759-assignment-2-ZhenxinLi/blob/feature/img/Application.jpg?raw=true)    
+![alt text](https://github.com/ZhenxinLi/TechChallenge/blob/main/img/Application.jpg?raw=true)    
 
 ## Architectural Overview  
   
