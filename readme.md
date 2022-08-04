@@ -47,3 +47,8 @@ The project itself is a simple GTD application provided by the employer. The app
   over an Internet Protocol (IP) network will be directed. And finally is a load balancer and its listener attached to the web to distribute incoming 
   application traffic across multiple targets
   
+### - Ansible
+
+  Ansible has been chosen to automate the deployment process. The `run-ansible.sh` in the `../ansible/scripts` directory outputs the ip of the subnet we are deploying our web into, as well as the postgres database parameters for configuration.  
+  
+  After gathering the outputs the `run-ansible.sh` then invokes the ansible playbook, which helps us to deploy the application in an automated manner as scripted in the playbook.
